@@ -1,0 +1,64 @@
+{
+  "id": "pdfcraft",
+  "name": "PdfCraft",
+  "tagline": "Acrobat-style PDF viewer and editor",
+  "upstream": "storytold/pdfcraft",
+  "port": null,
+  "docsPort": null,
+  "launch": {
+    "args": [
+      "--control",
+      "{home}/.pdfcraft-control.json"
+    ]
+  },
+  "mcp": {
+    "server": "pdfcraft",
+    "live": [
+      "mcp",
+      "--root",
+      "{documents}/PdfCraft"
+    ],
+    "headless": [
+      "mcp",
+      "--root",
+      "{documents}/PdfCraft"
+    ],
+    "default": "headless"
+  },
+  "windows": {
+    "dirs": [
+      "{ProgramFiles}\\PdfCraft",
+      "{LocalAppData}\\Programs\\PdfCraft"
+    ],
+    "app": "pdfcraft.exe",
+    "cli": "pdfcraft-cli.exe"
+  },
+  "macos": {
+    "bundles": [
+      "/Applications/PdfCraft.app",
+      "{home}/Applications/PdfCraft.app"
+    ],
+    "appBinary": "Contents/MacOS/PdfCraft",
+    "cliPaths": [
+      "{home}/.artcraft/bin/pdfcraft-cli",
+      "/usr/local/bin/pdfcraft-cli",
+      "/opt/homebrew/bin/pdfcraft-cli",
+      "{bundle}/Contents/MacOS/pdfcraft-cli"
+    ],
+    "cliReleaseAsset": "pdfcraft-cli-{version}-macos-universal.zip",
+    "cliBinaryInZip": "pdfcraft-cli"
+  },
+  "prepare": {
+    "dirs": [
+      "{documents}/PdfCraft"
+    ]
+  },
+  "auth": {
+    "type": "control-file",
+    "notes": "The UI control channel picks a random port and writes {port, token} to the control file; MCP itself is headless only."
+  },
+  "verified": {
+    "windows": true,
+    "macos": false
+  }
+}
